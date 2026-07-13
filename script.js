@@ -4,6 +4,20 @@ document.addEventListener('DOMContentLoaded', () => {
     year.textContent = new Date().getFullYear();
   }
 
+  // Hero video mute / unmute toggle.
+  const heroVideo = document.getElementById('heroVideo');
+  const muteBtn = document.getElementById('videoMuteBtn');
+  if (heroVideo && muteBtn) {
+    muteBtn.addEventListener('click', () => {
+      heroVideo.muted = !heroVideo.muted;
+      const unmuted = !heroVideo.muted;
+      muteBtn.classList.toggle('is-unmuted', unmuted);
+      muteBtn.setAttribute('aria-pressed', String(unmuted));
+      muteBtn.setAttribute('aria-label', unmuted ? 'Mute video' : 'Unmute video');
+      if (unmuted) heroVideo.play().catch(() => {});
+    });
+  }
+
   // Pictures shown when a product card is clicked.
   // Swap these Unsplash links for your own product photos any time.
   const productGalleries = {

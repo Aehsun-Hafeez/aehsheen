@@ -149,10 +149,57 @@ h1 {
   border: 1px solid var(--accent);
 }
 
-.hero-card img {
+.hero-card {
+  position: relative;
+}
+
+.hero-card img,
+.hero-card video {
+  width: 100%;
   border-radius: 1.5rem;
   min-height: 360px;
+  max-height: 520px;
+  object-fit: cover;
   box-shadow: 0 20px 45px rgba(0, 0, 0, 0.12);
+}
+
+.video-mute {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  color: #fff;
+  background: rgba(20, 12, 8, 0.5);
+  cursor: pointer;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.video-mute:hover,
+.video-mute:focus-visible {
+  background: var(--accent);
+  transform: scale(1.05);
+  outline: none;
+}
+
+.video-mute .icon-unmuted {
+  display: none;
+}
+
+.video-mute.is-unmuted .icon-muted {
+  display: none;
+}
+
+.video-mute.is-unmuted .icon-unmuted {
+  display: block;
 }
 
 .section {
