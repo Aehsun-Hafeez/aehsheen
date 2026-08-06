@@ -4,19 +4,22 @@ document.addEventListener('DOMContentLoaded', () => {
     year.textContent = new Date().getFullYear();
   }
 
-  // Hero video mute / unmute toggle.
-  const heroVideo = document.getElementById('heroVideo');
-  const muteBtn = document.getElementById('videoMuteBtn');
-  if (heroVideo && muteBtn) {
+  // Video mute / unmute toggles (hero + customer reviews).
+  const setupMuteToggle = (videoId, buttonId) => {
+    const video = document.getElementById(videoId);
+    const muteBtn = document.getElementById(buttonId);
+    if (!video || !muteBtn) return;
     muteBtn.addEventListener('click', () => {
-      heroVideo.muted = !heroVideo.muted;
-      const unmuted = !heroVideo.muted;
+      video.muted = !video.muted;
+      const unmuted = !video.muted;
       muteBtn.classList.toggle('is-unmuted', unmuted);
       muteBtn.setAttribute('aria-pressed', String(unmuted));
       muteBtn.setAttribute('aria-label', unmuted ? 'Mute video' : 'Unmute video');
-      if (unmuted) heroVideo.play().catch(() => {});
+      if (unmuted) video.play().catch(() => {});
     });
-  }
+  };
+  setupMuteToggle('heroVideo', 'videoMuteBtn');
+  setupMuteToggle('reviewVideo', 'reviewMuteBtn');
 
   // Pictures shown when a product card is clicked.
   // Swap these Unsplash links for your own product photos any time.
