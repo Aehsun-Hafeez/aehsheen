@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 420" role="img" aria-label="regs.green ESG disclosure platform">
+  <defs>
+    <linearGradient id="rgBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2b2b30"/>
+      <stop offset="1" stop-color="#141417"/>
+    </linearGradient>
+    <linearGradient id="rgLeaf" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#34d399"/>
+      <stop offset="1" stop-color="#15803d"/>
+    </linearGradient>
+    <linearGradient id="rgBar" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#16a34a"/>
+      <stop offset="1" stop-color="#4ade80"/>
+    </linearGradient>
+  </defs>
+  <rect width="520" height="420" rx="22" fill="url(#rgBg)"/>
+
+  <!-- subtle grid -->
+  <g opacity="0.10" stroke="#ffffff" stroke-width="1">
+    <line x1="60" y1="120" x2="460" y2="120"/>
+    <line x1="60" y1="200" x2="460" y2="200"/>
+    <line x1="60" y1="280" x2="460" y2="280"/>
+  </g>
+
+  <!-- emissions reduction chart (descending = decarbonisation) -->
+  <g>
+    <rect x="92"  y="150" width="40" height="160" rx="5" fill="url(#rgBar)" opacity="0.9"/>
+    <rect x="152" y="190" width="40" height="120" rx="5" fill="url(#rgBar)" opacity="0.8"/>
+    <rect x="212" y="220" width="40" height="90"  rx="5" fill="url(#rgBar)" opacity="0.7"/>
+    <rect x="272" y="252" width="40" height="58"  rx="5" fill="url(#rgBar)" opacity="0.6"/>
+  </g>
+  <line x1="80" y1="310" x2="450" y2="310" stroke="#ffffff" stroke-width="2" opacity="0.5"/>
+
+  <!-- leaf badge -->
+  <g transform="translate(330,70)">
+    <circle cx="60" cy="60" r="60" fill="#ffffff" fill-opacity="0.06"/>
+    <circle cx="60" cy="60" r="46" fill="url(#rgLeaf)"/>
+    <path d="M40 78 C 40 52, 60 38, 86 38 C 86 64, 66 80, 40 78 Z" fill="#ffffff"/>
+    <path d="M48 72 C 58 58, 70 50, 82 46" stroke="#15803d" stroke-width="3" fill="none" stroke-linecap="round"/>
+  </g>
+
+  <!-- module dots: Measure / Report / Assure -->
+  <g font-family="Poppins,Arial,sans-serif" font-size="13" font-weight="600" fill="#cfeeda">
+    <circle cx="320" cy="208" r="6" fill="#4ade80"/><text x="334" y="213">Measure</text>
+    <circle cx="320" cy="236" r="6" fill="#22c55e"/><text x="334" y="241">Report</text>
+    <circle cx="320" cy="264" r="6" fill="#16a34a"/><text x="334" y="269">Assure</text>
+  </g>
+
+  <text x="74" y="360" font-family="Poppins,Arial,sans-serif" font-size="19" font-weight="700" fill="#ffffff">regs.green</text>
+  <text x="74" y="384" font-family="Poppins,Arial,sans-serif" font-size="12.5" fill="#9fb4a6">ESG operating system · audit-ready disclosures</text>
+</svg>

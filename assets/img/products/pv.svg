@@ -1,0 +1,57 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 420" role="img" aria-label="PV — Present Value illustration">
+  <defs>
+    <linearGradient id="pvBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2b2b30"/>
+      <stop offset="100%" stop-color="#141417"/>
+    </linearGradient>
+    <linearGradient id="pvCoin" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f0726b"/>
+      <stop offset="100%" stop-color="#b91c1c"/>
+    </linearGradient>
+    <linearGradient id="pvArrow" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#e2231a"/>
+      <stop offset="100%" stop-color="#f0726b"/>
+    </linearGradient>
+  </defs>
+  <rect width="520" height="420" rx="22" fill="url(#pvBg)"/>
+
+  <!-- timeline -->
+  <line x1="50" y1="300" x2="470" y2="300" stroke="#ffffff" stroke-width="2" opacity="0.55" stroke-dasharray="3 6"/>
+
+  <!-- year ticks + labels -->
+  <g font-family="Helvetica,Arial,sans-serif" font-size="13" font-weight="700" fill="#ffffff" opacity="0.75" text-anchor="middle">
+    <text x="90"  y="335">T+1</text>
+    <text x="190" y="335">T+2</text>
+    <text x="290" y="335">T+3</text>
+    <text x="390" y="335">T+4</text>
+  </g>
+
+  <!-- future cashflows: shrinking coins (discounted toward PV node on the left) -->
+  <g>
+    <circle cx="90"  cy="240" r="44" fill="url(#pvCoin)" stroke="#7f1410" stroke-width="2"/>
+    <circle cx="190" cy="248" r="36" fill="url(#pvCoin)" stroke="#7f1410" stroke-width="2"/>
+    <circle cx="290" cy="256" r="29" fill="url(#pvCoin)" stroke="#7f1410" stroke-width="2"/>
+    <circle cx="390" cy="262" r="23" fill="url(#pvCoin)" stroke="#7f1410" stroke-width="2"/>
+  </g>
+  <g font-family="Helvetica,Arial,sans-serif" font-size="20" font-weight="800" fill="#ffffff" text-anchor="middle">
+    <text x="90"  y="248">$</text>
+    <text x="190" y="256">$</text>
+    <text x="290" y="263">$</text>
+    <text x="390" y="269">$</text>
+  </g>
+
+  <!-- discounting arrows curving leftward to a PV node -->
+  <path d="M380 220 C 300 130, 200 130, 130 170" fill="none" stroke="url(#pvArrow)" stroke-width="4" stroke-linecap="round" opacity="0.9"/>
+  <path d="M285 220 C 230 150, 180 150, 130 175" fill="none" stroke="url(#pvArrow)" stroke-width="3.5" stroke-linecap="round" opacity="0.75"/>
+  <path d="M185 220 C 160 170, 145 170, 130 180" fill="none" stroke="url(#pvArrow)" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+
+  <!-- PV node -->
+  <circle cx="100" cy="170" r="52" fill="#e2231a" stroke="#ffffff" stroke-width="4"/>
+  <text x="100" y="178" font-family="Helvetica,Arial,sans-serif" font-size="26" font-weight="800" fill="#ffffff" text-anchor="middle">PV</text>
+
+  <!-- discount-rate badge -->
+  <g transform="translate(360,60)">
+    <rect x="0" y="0" width="120" height="38" rx="19" fill="#ffffff" opacity="0.18"/>
+    <text x="60" y="25" font-family="Helvetica,Arial,sans-serif" font-size="14" font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="2">r = 8%</text>
+  </g>
+</svg>

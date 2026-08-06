@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Client Portal — Digi8</title>
+  <meta name="description" content="Sign in to your Digi8 client portal to access your projects, invoices, documents and support in one secure workspace." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" />
+  <link rel="stylesheet" href="/assets/css/styles.css?v=92" />
+  <style>
+    /* ---- Client Portal page-specific styles (self-contained) ---- */
+    .portal-perks { list-style: none; padding: 0; margin: 22px 0 0; display: grid; gap: 12px; max-width: 460px; }
+    .portal-perks li { position: relative; padding-left: 30px; color: var(--ink-600, #4b5563); font-size: 15.5px; }
+    .portal-perks li::before {
+      content: ""; position: absolute; left: 0; top: 2px; width: 20px; height: 20px; border-radius: 50%;
+      background: var(--emerald-500, #e2231a);
+      -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><path d='M20 6 9 17l-5-5'/></svg>") center/13px no-repeat;
+      mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><path d='M20 6 9 17l-5-5'/></svg>") center/13px no-repeat;
+    }
+
+    .portal-card {
+      width: 100%; max-width: 420px; margin-left: auto;
+      background: linear-gradient(160deg, #191c24, #0d0f14);
+      color: #e8eaf0; border: 1px solid rgba(255,255,255,.09); border-radius: 22px;
+      padding: 34px 30px; box-shadow: 0 40px 90px -40px rgba(0,0,0,.75);
+      position: relative; overflow: hidden;
+    }
+    .portal-card::before {
+      content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .5;
+      background:
+        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px) 0 0/100% 28px,
+        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px) 0 0/28px 100%;
+      -webkit-mask: radial-gradient(120% 90% at 80% 0%, #000, transparent 70%);
+      mask: radial-gradient(120% 90% at 80% 0%, #000, transparent 70%);
+    }
+    .portal-card > * { position: relative; }
+    .portal-badge {
+      display: inline-flex; align-items: center; gap: 7px; font-size: 12px; letter-spacing: .04em;
+      text-transform: uppercase; color: #aab0be; margin: 0 0 16px;
+    }
+    .portal-badge .dot { width: 8px; height: 8px; border-radius: 50%; background: #34d399; box-shadow: 0 0 0 4px rgba(52,211,153,.18); }
+    .portal-card h2 { font-family: var(--font-head, "Space Grotesk", sans-serif); font-size: 26px; line-height: 1.15; margin: 0 0 6px; color: #fff; }
+    .portal-card .lede { color: #aab0be; margin: 0 0 22px; font-size: 15px; }
+    .portal-field { position: relative; display: block; margin: 0 0 14px; }
+    .portal-field input {
+      width: 100%; padding: 15px 16px; border-radius: 13px; border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.04); color: #fff; font-size: 15px; font-family: inherit; outline: none;
+      transition: border-color .2s, box-shadow .2s, background .2s;
+    }
+    .portal-field input::placeholder { color: #7b8291; }
+    .portal-field input:focus { border-color: var(--emerald-500, #e2231a); background: rgba(255,255,255,.06); box-shadow: 0 0 0 3px rgba(226,35,26,.25); }
+    .portal-card .btn { width: 100%; justify-content: center; margin-top: 4px; color: #fff; -webkit-text-fill-color: #fff; font-weight: 600; }
+    .portal-card.is-loading .btn { opacity: .7; pointer-events: none; }
+    .portal-hint { color: #7b8291; font-size: 13px; margin: 16px 0 0; text-align: center; }
+    .portal-hint a { color: #f0726b; text-decoration: none; }
+    .portal-hint a:hover { text-decoration: underline; }
+    .portal-foot { margin: 20px 0 0; padding-top: 16px; border-top: 1px solid rgba(255,255,255,.08); display: flex; align-items: center; justify-content: center; gap: 8px; color: #6a7180; font-size: 12.5px; }
+    .portal-foot svg { opacity: .8; }
+    .sr-only { position: absolute; width: 1px; height: 1px; clip: rect(0 0 0 0); overflow: hidden; }
+
+    /* Welcome / redirect state */
+    .portal-welcome { text-align: center; padding: 8px 0 4px; }
+    .portal-welcome__greeting { color: #aab0be; margin: 0; font-size: 14px; }
+    .portal-welcome__name { font-family: var(--font-head, "Space Grotesk", sans-serif); color: #fff; font-size: 24px; margin: 4px 0 6px; }
+    .portal-welcome__msg { color: #aab0be; margin: 0 0 18px; font-size: 14px; }
+    .portal-spinner { width: 34px; height: 34px; margin: 0 auto; border-radius: 50%; border: 3px solid rgba(255,255,255,.15); border-top-color: var(--emerald-500, #e2231a); animation: portal-spin .8s linear infinite; }
+    @keyframes portal-spin { to { transform: rotate(360deg); } }
+
+    /* Toasts */
+    .portal-toasts { position: fixed; right: 18px; bottom: 18px; z-index: 60; display: grid; gap: 10px; max-width: 340px; }
+    .portal-toast { display: flex; align-items: flex-start; gap: 10px; padding: 13px 14px; border-radius: 12px; background: #1f2430; color: #eef0f5; border: 1px solid rgba(255,255,255,.1); box-shadow: 0 18px 40px -18px rgba(0,0,0,.6); animation: portal-toast-in .25s ease; font-size: 14px; }
+    .portal-toast--error { border-left: 3px solid #e2231a; }
+    .portal-toast--info { border-left: 3px solid #34d399; }
+    .portal-toast__icon { width: 20px; height: 20px; flex: 0 0 auto; border-radius: 50%; display: grid; place-items: center; font-size: 12px; font-weight: 700; color: #fff; }
+    .portal-toast--error .portal-toast__icon { background: #e2231a; }
+    .portal-toast--info .portal-toast__icon { background: #34d399; }
+    .portal-toast__msg { flex: 1; line-height: 1.35; }
+    .portal-toast__close { background: none; border: 0; color: #9aa1b0; font-size: 18px; line-height: 1; cursor: pointer; padding: 0 2px; }
+    .portal-toast.is-out { animation: portal-toast-out .25s ease forwards; }
+    @keyframes portal-toast-in { from { opacity: 0; transform: translateY(8px); } }
+    @keyframes portal-toast-out { to { opacity: 0; transform: translateY(8px); } }
+
+    @media (max-width: 960px) {
+      .portal-card { max-width: 100%; margin: 0; }
+      .portal-perks { max-width: 100%; }
+    }
+  </style>
+</head>
+<body class="home">
+
+  <!-- Header -->
+  <div class="topbar">
+    <div class="container topbar__inner">
+      <div class="topbar__left">
+        <a class="topbar__phone" href="tel:+923214639297"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.63A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>+92 321 4639297</a>
+        <a class="topbar__site" href="https://digi8.tech" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>www.digi8.tech</a>
+        <span class="topbar__addr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>415, Block B Faisal Town, Lahore</span>
+      </div>
+      <div class="topbar__social">
+        <a href="https://www.facebook.com/p/Digi8-61577698963574/" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 320 512" fill="currentColor"><path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"/></svg></a>
+        <a href="https://pk.linkedin.com/company/digi8-private-limited" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 448 512" fill="currentColor"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg></a>
+        <a href="https://www.instagram.com/digi8.tech" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 448 512" fill="currentColor"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg></a>
+      </div>
+    </div>
+  </div>
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="/index.html" aria-label="Digi8 home">
+        <img class="brand__mark" src="/assets/img/digi8-binary.svg" alt="" width="66" height="40" />
+        <span class="brand__name"><span class="brand-shine">digi8</span><small>Go Digital. Better!</small></span>
+      </a>
+
+      <nav class="nav" id="primary-nav" aria-label="Primary">
+        <a href="/index.html">Home</a>
+        <a href="/products/index.html">Products</a>
+        <a href="/about/index.html">About Us</a>
+        <a href="/clients/index.html">Our Clients</a>
+        <a href="/contact/index.html">Contact</a>
+      </nav>
+
+      <div class="header-cta">
+        <a class="btn-portal-logo btn-portal-logo--bare" aria-label="Client Portal" href="#odoo-form-section"><img src="/assets/img/odoo-logo-light.png" alt="Odoo client portal" /></a>
+        <button class="nav-toggle" type="button" aria-controls="primary-nav" aria-expanded="false" aria-label="Toggle menu">
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero + Sign-in -->
+  <section class="hero" id="odoo-form-section">
+    <div class="container hero__grid">
+      <div class="hero__copy">
+        <span class="eyebrow">Client Portal</span>
+        <h1>Access your Digi8 workspace</h1>
+        <p class="hero__lead">Your dedicated portal brings projects, invoices, documents and support together in one secure place — available whenever you need it.</p>
+        <ul class="portal-perks">
+          <li>Track project progress and milestones in real time</li>
+          <li>View and download invoices &amp; statements</li>
+          <li>Access shared documents and deliverables</li>
+          <li>Raise and follow up on support requests</li>
+        </ul>
+      </div>
+
+      <div class="hero__visual">
+        <form class="portal-card" id="odoo-id-form" novalidate>
+          <p class="portal-badge"><span class="dot"></span> Secure sign-in</p>
+          <h2>Sign in to continue</h2>
+          <p class="lede">Enter your account ID to access your portal.</p>
+          <label class="portal-field">
+            <span class="sr-only">Account ID</span>
+            <input type="text" name="id" placeholder="Your ID — e.g. DG-00125" autocomplete="off" inputmode="text" />
+          </label>
+          <button class="btn btn-primary" type="submit">Continue</button>
+          <p class="portal-hint">Don't have an ID? <a href="/contact/index.html">Contact your account manager.</a></p>
+          <p class="portal-foot">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            256-bit encrypted • Powered by Odoo
+          </p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- What's inside -->
+  <section class="section section--soft">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Inside your portal</span>
+        <h2>Everything about your engagement, in one place</h2>
+        <p>A single, secure workspace that keeps you and the Digi8 team perfectly in sync.</p>
+      </div>
+      <div class="grid grid-4">
+        <div class="card reveal">
+          <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 3 5-6"/></svg></div>
+          <h3>Projects</h3>
+          <p>Live status, milestones and timelines for every active project.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2h12l4 4v16H4z"/><path d="M16 2v4h4"/><path d="M8 13h8M8 17h8M8 9h3"/></svg></div>
+          <h3>Invoices</h3>
+          <p>View, download and reconcile invoices and statements anytime.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M13 2v7h7"/></svg></div>
+          <h3>Documents</h3>
+          <p>Securely share contracts, deliverables and reference files.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+          <h3>Support</h3>
+          <p>Raise tickets and track responses without leaving the portal.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a class="brand" href="/index.html"><img class="brand__mark" src="/assets/img/digi8-binary.svg" alt="" width="66" height="40" /><span class="brand__name">digi8</span></a>
+          <p style="margin-top:16px">From concept to code — Transforming Business Through Technology</p>
+          <div class="footer-social">
+            <a href="https://www.facebook.com/p/Digi8-61577698963574/" target="_blank" rel="noopener" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 320 512" fill="currentColor"><path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"/></svg></a>
+            <a href="https://pk.linkedin.com/company/digi8-private-limited" target="_blank" rel="noopener" aria-label="LinkedIn"><svg width="18" height="18" viewBox="0 0 448 512" fill="currentColor"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg></a>
+            <a href="https://www.instagram.com/digi8.tech" target="_blank" rel="noopener" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 448 512" fill="currentColor"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="/index.html">Home</a></li>
+            <li><a href="/products/index.html">Products</a></li>
+            <li><a href="/about/index.html">About Us</a></li>
+            <li><a href="/clients/index.html">Our Clients</a></li>
+            <li><a href="/contact/index.html">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Products</h4>
+          <ul>
+            <li><a href="/products/index.html#ecl">ECL Engine</a></li>
+            <li><a href="/products/pf/index.html">Provident Fund</a></li>
+            <li><a href="https://www.regs.green" target="_blank" rel="noopener">Regs Green</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Get in touch</h4>
+          <ul>
+            <li><a href="mailto:connect@digi8.tech">connect@digi8.tech</a></li>
+            <li><a href="https://wa.me/923214639297" target="_blank" rel="noopener">+92 321 4639297</a></li>
+            <li>415, Block B Faisal Town,<br>Lahore, Pakistan</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 Digi8 (Private) Limited. All rights reserved.</span>
+        <span>Technology | Agility | Intelligence</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp floating button -->
+  <a class="wa-fab" href="https://wa.me/923214639297" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp" title="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.9c0 2.1.55 4.06 1.6 5.82L2 22l4.42-1.16a9.9 9.9 0 0 0 5.62 1.74h.01c5.46 0 9.9-4.45 9.9-9.9 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm5.8 14.06c-.25.7-1.44 1.33-2 1.42-.53.08-1.2.11-1.94-.12-.45-.14-1.02-.33-1.76-.65-3.1-1.34-5.12-4.46-5.28-4.67-.15-.2-1.26-1.67-1.26-3.19 0-1.52.8-2.27 1.08-2.58.28-.31.61-.39.82-.39.2 0 .41 0 .59.01.19.01.44-.07.69.53.25.6.86 2.1.94 2.25.08.15.13.33.03.53-.1.2-.15.33-.3.5-.15.18-.31.4-.45.53-.15.15-.3.31-.13.6.17.3.76 1.25 1.63 2.02 1.12 1 2.07 1.31 2.36 1.46.3.15.47.13.64-.08.17-.2.74-.86.94-1.16.2-.3.4-.25.67-.15.27.1 1.72.81 2.01.96.3.15.5.22.57.35.07.12.07.72-.18 1.42z"/></svg>
+  </a>
+
+  <script src="/assets/js/main.js"></script>
+  <script>
+    // Sticky/merged header shade on scroll (same behaviour as the rest of the site)
+    (function () {
+      var h = document.querySelector(".site-header");
+      if (!h) return;
+      var toggle = function () { h.classList.toggle("is-scrolled", window.scrollY > 8); };
+      toggle();
+      window.addEventListener("scroll", toggle, { passive: true });
+    })();
+  </script>
+  <script>
+    // Client-portal sign-in: account-ID lookup -> redirect to portal.
+    (function () {
+      var form = document.getElementById("odoo-id-form");
+      if (!form) return;
+      var input = form.elements["id"];
+
+      // If arrived via #odoo-form-section, focus the ID field once scroll settles.
+      if (window.location.hash === "#odoo-form-section") {
+        window.requestAnimationFrame(function () {
+          try { input.focus({ preventScroll: true }); } catch (_) { input.focus(); }
+        });
+      }
+
+      function toasts() {
+        var c = document.querySelector(".portal-toasts");
+        if (!c) { c = document.createElement("div"); c.className = "portal-toasts"; c.setAttribute("aria-live", "polite"); document.body.appendChild(c); }
+        return c;
+      }
+      function toast(msg, type) {
+        var c = toasts();
+        var t = document.createElement("div");
+        t.className = "portal-toast portal-toast--" + (type || "info");
+        t.setAttribute("role", type === "error" ? "alert" : "status");
+        t.innerHTML = '<span class="portal-toast__icon">' + (type === "error" ? "!" : "✓") +
+          '</span><span class="portal-toast__msg"></span><button class="portal-toast__close" type="button" aria-label="Dismiss">×</button>';
+        t.querySelector(".portal-toast__msg").textContent = msg;
+        c.appendChild(t);
+        var done = false;
+        function out() { if (done) return; done = true; t.classList.add("is-out"); t.addEventListener("animationend", function () { if (t.parentNode) t.parentNode.removeChild(t); }); }
+        t.querySelector(".portal-toast__close").addEventListener("click", out);
+        setTimeout(out, 4000);
+      }
+      function setLoading(state) {
+        form.classList.toggle("is-loading", state);
+        var btn = form.querySelector(".btn");
+        if (btn) btn.setAttribute("aria-disabled", state ? "true" : "false");
+        if (input) input.disabled = state;
+      }
+      function welcome(data) {
+        form.innerHTML =
+          '<div class="portal-welcome">' +
+            '<p class="portal-welcome__greeting">Welcome,</p>' +
+            '<h2 class="portal-welcome__name"></h2>' +
+            '<p class="portal-welcome__msg">Redirecting to your portal…</p>' +
+            '<div class="portal-spinner"></div>' +
+          '</div>';
+        form.querySelector(".portal-welcome__name").textContent = (data && data.name) || "there";
+        if (data && data.url) setTimeout(function () { window.location.href = data.url; }, 1600);
+      }
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var v = (input.value || "").trim();
+        if (!v) { toast("Please enter your account ID to continue.", "error"); input.focus(); return; }
+        setLoading(true);
+        fetch("/api/lookup?id=" + encodeURIComponent(v))
+          .then(function (r) { return r.json().then(function (b) { return { ok: r.ok, body: b }; }); })
+          .then(function (resp) {
+            if (resp.ok) { welcome(resp.body); }
+            else { setLoading(false); toast((resp.body && resp.body.error) || "We couldn't find that ID. Please check and try again.", "error"); input.focus(); input.select(); }
+          })
+          .catch(function () {
+            setLoading(false);
+            toast("We couldn't reach the portal service right now. Please try again shortly, or contact your account manager.", "error");
+          });
+      });
+    })();
+  </script>
+</body>
+</html>

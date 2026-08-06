@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 760" fill="none" preserveAspectRatio="xMidYMid slice" role="img" aria-hidden="true">
+  <!-- circuit traces -->
+  <g stroke="#e2231a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.5">
+    <path d="M740 90 H900 V210 H1040 V120 H1210"/>
+    <path d="M1440 260 H1250 V360 H1120"/>
+    <path d="M820 300 V430 H970 V540"/>
+    <path d="M1000 650 H1160 V560 H1300 V620 H1440"/>
+    <path d="M900 710 V600 H1050"/>
+    <path d="M1190 80 V190 H1330 V40"/>
+    <path d="M700 470 H850 V620"/>
+    <path d="M1090 240 H1200"/>
+    <path d="M960 40 V130"/>
+    <path d="M1270 430 H1390 V300"/>
+    <path d="M620 200 H760 V330"/>
+  </g>
+  <!-- junction nodes -->
+  <g fill="#e2231a" opacity="0.75">
+    <circle cx="900" cy="90" r="5"/><circle cx="1040" cy="210" r="4"/><circle cx="1210" cy="120" r="5"/>
+    <circle cx="1250" cy="260" r="4"/><circle cx="1120" cy="360" r="5"/>
+    <circle cx="820" cy="300" r="4"/><circle cx="970" cy="540" r="5"/>
+    <circle cx="1160" cy="650" r="4"/><circle cx="1300" cy="560" r="4"/>
+    <circle cx="1330" cy="190" r="5"/><circle cx="850" cy="470" r="4"/>
+    <circle cx="1200" cy="240" r="4"/><circle cx="1390" cy="430" r="4"/>
+    <circle cx="760" cy="200" r="4"/>
+  </g>
+  <!-- chips -->
+  <g stroke="#334155" stroke-width="2" fill="none" opacity="0.28">
+    <rect x="1080" y="320" width="82" height="82" rx="7"/>
+    <path d="M1080 342 h-14 M1080 362 h-14 M1080 382 h-14 M1162 342 h14 M1162 362 h14 M1162 382 h14"/>
+    <rect x="880" y="470" width="72" height="72" rx="7"/>
+    <path d="M880 490 h-12 M880 512 h-12 M952 490 h12 M952 512 h12"/>
+  </g>
+  <g fill="#334155" opacity="0.16">
+    <circle cx="700" cy="470" r="3"/><circle cx="620" cy="200" r="3"/><circle cx="1000" cy="650" r="3"/>
+  </g>
+</svg>

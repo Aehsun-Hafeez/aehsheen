@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 360" role="img" aria-label="Present Value time value of money">
+  <defs>
+    <linearGradient id="pvbg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fdeceb"/>
+      <stop offset="1" stop-color="#fbf7f7"/>
+    </linearGradient>
+    <linearGradient id="pvcoin" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f0726b"/>
+      <stop offset="1" stop-color="#e2231a"/>
+    </linearGradient>
+  </defs>
+  <rect width="480" height="360" fill="url(#pvbg)"/>
+  <!-- card -->
+  <rect x="54" y="56" width="372" height="212" rx="16" fill="#ffffff" stroke="#efe7e7"/>
+
+  <!-- discount curve (future -> present) -->
+  <path d="M360 108 C300 96, 180 150, 116 206" fill="none" stroke="#e2231a" stroke-width="3" stroke-dasharray="2 8" stroke-linecap="round"/>
+  <path d="M132 196 L112 210 L120 187 Z" fill="#e2231a"/>
+
+  <!-- future coin (large, faded) -->
+  <g opacity="0.55">
+    <circle cx="362" cy="120" r="34" fill="url(#pvcoin)"/>
+    <circle cx="362" cy="120" r="34" fill="none" stroke="#fff" stroke-width="2" stroke-dasharray="3 5"/>
+    <text x="362" y="128" font-family="Poppins,Arial,sans-serif" font-size="22" font-weight="800" fill="#fff" text-anchor="middle">$</text>
+  </g>
+  <text x="362" y="178" font-family="Poppins,Arial,sans-serif" font-size="12" font-weight="600" fill="#9b8f8f" text-anchor="middle">Future value</text>
+
+  <!-- present value coin (solid) -->
+  <g>
+    <circle cx="116" cy="166" r="44" fill="url(#pvcoin)"/>
+    <circle cx="116" cy="166" r="44" fill="none" stroke="#fff" stroke-width="3"/>
+    <text x="116" y="176" font-family="Poppins,Arial,sans-serif" font-size="30" font-weight="800" fill="#fff" text-anchor="middle">$</text>
+  </g>
+  <text x="116" y="232" font-family="Poppins,Arial,sans-serif" font-size="12" font-weight="700" fill="#1f2937" text-anchor="middle">Present value</text>
+
+  <!-- clock badge -->
+  <g transform="translate(232,80)">
+    <circle cx="26" cy="26" r="25" fill="#fff" stroke="#1f2937" stroke-width="3"/>
+    <line x1="26" y1="26" x2="26" y2="12" stroke="#1f2937" stroke-width="3" stroke-linecap="round"/>
+    <line x1="26" y1="26" x2="37" y2="30" stroke="#e2231a" stroke-width="3" stroke-linecap="round"/>
+  </g>
+
+  <text x="74" y="302" font-family="Poppins,Arial,sans-serif" font-size="17" font-weight="700" fill="#1f2937">Present Value</text>
+  <text x="74" y="324" font-family="Poppins,Arial,sans-serif" font-size="12.5" fill="#9b8f8f">IAS 19 actuarial discounting</text>
+</svg>

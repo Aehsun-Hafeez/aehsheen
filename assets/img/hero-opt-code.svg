@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 400" fill="none" role="img" aria-label="Code editor with a JavaScript snippet" font-family="'Consolas','SF Mono','Menlo','Courier New',monospace">
+  <defs>
+    <linearGradient id="c-badge" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f0726b"/><stop offset="1" stop-color="#b91c1c"/></linearGradient>
+    <style>
+      .cc { animation: cb 1.05s steps(1) infinite; }
+      @keyframes cb { 50% { opacity: 0; } }
+      @media (prefers-reduced-motion: reduce) { .cc { animation: none; } }
+      text { dominant-baseline: alphabetic; }
+    </style>
+  </defs>
+
+  <!-- window -->
+  <rect x="60" y="52" width="440" height="300" rx="16" fill="#12141b"/>
+  <!-- title bar -->
+  <rect x="60" y="52" width="440" height="38" rx="16" fill="#1b1e27"/>
+  <rect x="60" y="74" width="440" height="16" fill="#1b1e27"/>
+  <circle cx="84" cy="71" r="5" fill="#e2231a"/><circle cx="102" cy="71" r="5" fill="#f0b429"/><circle cx="120" cy="71" r="5" fill="#3fb950"/>
+  <!-- file tab -->
+  <rect x="150" y="60" width="118" height="30" rx="6" fill="#12141b"/>
+  <rect x="162" y="71" width="10" height="10" rx="2" fill="#f0726b"/>
+  <text x="180" y="79" font-size="12" fill="#c8ccd4">deploy.js</text>
+  <text x="250" y="79" font-size="12" fill="#6a7280">×</text>
+
+  <!-- activity bar -->
+  <rect x="60" y="90" width="26" height="262" fill="#15171f"/>
+  <rect x="68" y="104" width="10" height="12" rx="2" fill="#e2231a"/>
+  <g fill="#3a4150"><rect x="68" y="130" width="10" height="10" rx="2"/><rect x="68" y="152" width="10" height="10" rx="2"/><rect x="68" y="174" width="10" height="10" rx="2"/><rect x="68" y="196" width="10" height="10" rx="2"/></g>
+
+  <!-- active line highlight -->
+  <rect x="86" y="176" width="366" height="18" fill="#ffffff" opacity="0.04"/>
+
+  <!-- line numbers -->
+  <g font-size="11" fill="#454d5b" text-anchor="end">
+    <text x="118" y="114">1</text><text x="118" y="134">2</text><text x="118" y="154">3</text>
+    <text x="118" y="174">4</text><text x="118" y="194">5</text><text x="118" y="214">6</text>
+    <text x="118" y="234">7</text><text x="118" y="254">8</text><text x="118" y="274">9</text>
+    <text x="118" y="294">10</text>
+  </g>
+
+  <!-- code -->
+  <g font-size="12.5" xml:space="preserve">
+    <text x="128" y="114"><tspan fill="#f0726b">import </tspan><tspan fill="#c8ccd4">{ </tspan><tspan fill="#dcdcaa">build</tspan><tspan fill="#c8ccd4"> } </tspan><tspan fill="#f0726b">from </tspan><tspan fill="#d7a45f">"digi8"</tspan><tspan fill="#c8ccd4">;</tspan></text>
+    <text x="128" y="154"><tspan fill="#c586c0">function </tspan><tspan fill="#dcdcaa">deploy</tspan><tspan fill="#c8ccd4">(</tspan><tspan fill="#9cdcfe">app</tspan><tspan fill="#c8ccd4">) {</tspan></text>
+    <text x="128" y="174"><tspan fill="#f0726b">  const </tspan><tspan fill="#4fc1ff">config</tspan><tspan fill="#c8ccd4"> = </tspan><tspan fill="#dcdcaa">load</tspan><tspan fill="#c8ccd4">(</tspan><tspan fill="#9cdcfe">app</tspan><tspan fill="#c8ccd4">);</tspan></text>
+    <text x="128" y="194"><tspan fill="#6a7f6a">  // ship it to production</tspan></text>
+    <text x="128" y="214"><tspan fill="#c586c0">  return </tspan><tspan fill="#dcdcaa">build</tspan><tspan fill="#c8ccd4">(</tspan><tspan fill="#9cdcfe">config</tspan><tspan fill="#c8ccd4">)</tspan></text>
+    <text x="128" y="234"><tspan fill="#c8ccd4">    .</tspan><tspan fill="#dcdcaa">then</tspan><tspan fill="#c8ccd4">(</tspan><tspan fill="#9cdcfe">res</tspan><tspan fill="#c586c0"> =&gt; </tspan><tspan fill="#9cdcfe">res</tspan><tspan fill="#c8ccd4">.</tspan><tspan fill="#4fc1ff">ok</tspan><tspan fill="#c8ccd4">);</tspan></text>
+    <text x="128" y="254"><tspan fill="#c8ccd4">}</tspan></text>
+    <text x="128" y="294"><tspan fill="#f0726b">export default </tspan><tspan fill="#dcdcaa">deploy</tspan><tspan fill="#c8ccd4">;</tspan></text>
+  </g>
+  <!-- blinking caret on the active line -->
+  <rect class="cc" x="318" y="164" width="2" height="14" fill="#f0726b"/>
+
+  <!-- minimap -->
+  <g opacity="0.5">
+    <rect x="462" y="104" width="30" height="8" rx="2" fill="#3a2b2b"/>
+    <rect x="462" y="116" width="18" height="4" rx="2" fill="#2b3040"/>
+    <rect x="466" y="126" width="22" height="4" rx="2" fill="#2b3040"/>
+    <rect x="466" y="134" width="14" height="4" rx="2" fill="#2b3040"/>
+    <rect x="470" y="142" width="18" height="4" rx="2" fill="#2b3040"/>
+    <rect x="466" y="150" width="10" height="4" rx="2" fill="#2b3040"/>
+    <rect x="470" y="158" width="16" height="4" rx="2" fill="#2b3040"/>
+    <rect x="462" y="170" width="24" height="4" rx="2" fill="#2b3040"/>
+  </g>
+
+  <!-- status bar -->
+  <rect x="60" y="324" width="440" height="28" rx="16" fill="#1b1e27"/>
+  <rect x="60" y="324" width="440" height="14" fill="#1b1e27"/>
+  <rect x="72" y="332" width="60" height="14" rx="4" fill="#b91c1c"/>
+  <text x="82" y="343" font-size="10" fill="#fff">main*</text>
+  <circle cx="150" cy="339" r="3" fill="#3fb950"/>
+  <text x="160" y="343" font-size="10" fill="#8a93a2">0 errors</text>
+  <text x="410" y="343" font-size="10" fill="#8a93a2">UTF-8  JS</text>
+
+  <!-- floating </> badge -->
+  <g transform="translate(408,26)">
+    <rect x="0" y="0" width="72" height="72" rx="20" fill="url(#c-badge)"/>
+    <path d="M28 26 L18 36 L28 46 M44 26 L54 36 L44 46" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

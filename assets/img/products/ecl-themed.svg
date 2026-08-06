@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 360" role="img" aria-label="Expected Credit Loss staging chart">
+  <defs>
+    <linearGradient id="eclbg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fdeceb"/>
+      <stop offset="1" stop-color="#fbf7f7"/>
+    </linearGradient>
+    <linearGradient id="eclbar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e2231a"/>
+      <stop offset="1" stop-color="#b91c1c"/>
+    </linearGradient>
+  </defs>
+  <rect width="480" height="360" fill="url(#eclbg)"/>
+  <!-- chart card -->
+  <rect x="54" y="58" width="372" height="208" rx="16" fill="#ffffff" stroke="#efe7e7"/>
+  <circle cx="78" cy="82" r="4" fill="#e2231a"/><circle cx="92" cy="82" r="4" fill="#d9d3d3"/><circle cx="106" cy="82" r="4" fill="#d9d3d3"/>
+  <rect x="320" y="76" width="86" height="12" rx="6" fill="#f1eaea"/>
+  <!-- axis -->
+  <line x1="80" y1="232" x2="400" y2="232" stroke="#eadfdf" stroke-width="2"/>
+  <!-- bars: escalating risk -->
+  <rect x="108" y="178" width="40" height="54" rx="5" fill="#cdd3da"/>
+  <rect x="178" y="150" width="40" height="82" rx="5" fill="#f0a8a3"/>
+  <rect x="248" y="120" width="40" height="112" rx="5" fill="url(#eclbar)"/>
+  <rect x="318" y="100" width="40" height="132" rx="5" fill="url(#eclbar)"/>
+  <!-- trend line -->
+  <polyline points="128,168 198,140 268,112 338,92" fill="none" stroke="#1f2937" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="128" cy="168" r="5" fill="#fff" stroke="#1f2937" stroke-width="3"/>
+  <circle cx="198" cy="140" r="5" fill="#fff" stroke="#1f2937" stroke-width="3"/>
+  <circle cx="268" cy="112" r="5" fill="#fff" stroke="#1f2937" stroke-width="3"/>
+  <circle cx="338" cy="92" r="5" fill="#fff" stroke="#1f2937" stroke-width="3"/>
+  <!-- shield badge -->
+  <g transform="translate(360,250)">
+    <path d="M36 4 6 16v22c0 18 16 28 30 34 14-6 30-16 30-34V16L36 4z" fill="#fff" stroke="#e2231a" stroke-width="3"/>
+    <path d="M24 36l9 9 18-19" fill="none" stroke="#e2231a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <!-- stage labels -->
+  <text x="128" y="252" font-family="Poppins,Arial,sans-serif" font-size="12" font-weight="600" fill="#71717a" text-anchor="middle">S1</text>
+  <text x="198" y="252" font-family="Poppins,Arial,sans-serif" font-size="12" font-weight="600" fill="#71717a" text-anchor="middle">S2</text>
+  <text x="268" y="252" font-family="Poppins,Arial,sans-serif" font-size="12" font-weight="600" fill="#71717a" text-anchor="middle">S3</text>
+  <text x="74" y="300" font-family="Poppins,Arial,sans-serif" font-size="17" font-weight="700" fill="#1f2937">Expected Credit Loss</text>
+  <text x="74" y="322" font-family="Poppins,Arial,sans-serif" font-size="12.5" fill="#9b8f8f">IFRS 9 staging &amp; provisioning</text>
+</svg>

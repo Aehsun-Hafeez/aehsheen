@@ -1,0 +1,302 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ECL — Expected Credit Loss (IFRS 9) | Digi8</title>
+  <meta name="description" content="Digi8 ECL: end-to-end IFRS 9 expected credit loss modelling, validation and automation for banks, finance companies and NBFIs. PD, LGD, EAD, staging & SICR, macro scenarios, CBUAE-aligned disclosure." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=Playfair+Display:ital,wght@1,500;1,600&display=swap" />
+  <link rel="stylesheet" href="/assets/css/styles.css?v=92" />
+  <style>
+    /* ECL product-page specifics (built on the shared red + charcoal theme) */
+    .product-hero { position: relative; overflow: hidden; background:
+        radial-gradient(900px 480px at 88% -10%, rgba(226,35,26,.22), transparent 60%),
+        radial-gradient(700px 420px at -5% 110%, rgba(226,35,26,.10), transparent 55%),
+        var(--ink-900); color: #d7d5d8; padding: 84px 0 76px; }
+    .product-hero .container { position: relative; z-index: 1; }
+    .product-hero .eyebrow { color: var(--emerald-500); }
+    .product-hero .audience { font-size: .82rem; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-300); font-weight: 600; margin-bottom: 18px; }
+    .product-hero h1 { color: #fff; max-width: 16ch; margin-bottom: 22px; }
+    .product-hero h1 em { font-family: "Playfair Display", Georgia, serif; font-style: italic; font-weight: 500; color: var(--emerald-500); }
+    .product-hero__lead { font-size: 1.12rem; color: #c2c0c5; max-width: 620px; margin-bottom: 30px; }
+    .product-hero__actions { display: flex; flex-wrap: wrap; gap: 14px; }
+    .product-hero__meta { display: flex; gap: 36px; flex-wrap: wrap; margin-top: 40px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,.12); }
+    .product-hero__meta div strong { display: block; color: #fff; font-size: 1.05rem; font-weight: 600; }
+    .product-hero__meta div span { color: var(--ink-300); font-size: .85rem; }
+
+    .cap-card { position: relative; padding-top: 34px; }
+    .cap-num { position: absolute; top: 26px; right: 28px; font-size: 1.4rem; font-weight: 800; color: var(--emerald-50); letter-spacing: -.02em; }
+    .cap-card .k { font-size: .8rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--emerald-600); display: block; margin-bottom: 10px; }
+  </style>
+</head>
+<body class="home">
+
+  <div class="topbar">
+    <div class="container topbar__inner">
+      <div class="topbar__left">
+        <a class="topbar__phone" href="tel:+923214639297"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.63A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>+92 321 4639297</a>
+        <a class="topbar__site" href="https://digi8.tech" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>www.digi8.tech</a>
+        <span class="topbar__addr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>415, Block B Faisal Town, Lahore</span>
+      </div>
+      <div class="topbar__social">
+        <a href="https://www.facebook.com/p/Digi8-61577698963574/" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 320 512" fill="currentColor"><path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"/></svg></a>
+        <a href="https://pk.linkedin.com/company/digi8-private-limited" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 448 512" fill="currentColor"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg></a>
+        <a href="https://www.instagram.com/digi8.tech" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 448 512" fill="currentColor"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg></a>
+      </div>
+    </div>
+  </div>
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="/index.html" aria-label="Digi8 home">
+        <img class="brand__mark" src="/assets/img/digi8-binary.svg" alt="" width="66" height="40" />
+        <span class="brand__name"><span class="brand-shine">digi8</span><small>Go Digital. Better!</small></span>
+      </a>
+      <nav class="nav" id="primary-nav" aria-label="Primary">
+        <a href="/index.html">Home</a>
+        <a href="/products/index.html" class="is-active" aria-current="page">Products</a>
+        <a href="/about/index.html">About Us</a>
+        <a href="/clients/index.html">Our Clients</a>
+        <a href="/contact/index.html">Contact</a>
+      </nav>
+      <div class="header-cta">
+        <a class="btn btn-primary btn-portal" href="/odoo/#odoo-form-section"><span class="btn-shine">Client Portal</span></a>
+        <button class="nav-toggle" type="button" aria-controls="primary-nav" aria-expanded="false" aria-label="Toggle menu"><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero__grid">
+      <div class="hero__copy">
+        <span class="eyebrow">Expected Credit Loss · IFRS 9</span>
+        <h1>Provision with precision, comply with confidence</h1>
+        <p class="hero__lead">End-to-end ECL modelling, validation and automation — PD, LGD &amp; EAD, staging &amp; SICR, and probability-weighted scenarios, all defensible and audit-ready.</p>
+        <div class="hero__actions">
+          <a class="btn btn-primary" href="#capabilities">Explore capabilities ↓</a>
+          <a class="btn btn-ghost" href="/contact/index.html">Talk to our ECL team →</a>
+        </div>
+      </div>
+
+      <div class="hero__visual" aria-hidden="true">
+        <div class="hero__float">
+          <div class="ui-card hero-media-3d">
+            <div class="ui-card__bar"><b>ECL Provision Summary</b><em>Q2 2026</em></div>
+            <div class="ui-card__body">
+              <div class="ui-kpis">
+                <div class="ui-kpi"><small>Total ECL</small><strong>$4.82M</strong><span class="delta">▲ 2.1% QoQ</span></div>
+                <div class="ui-kpi"><small>Coverage ratio</small><strong>3.4%</strong><span class="muted">Portfolio</span></div>
+              </div>
+              <div class="ui-chart">
+                <i style="height:38%"></i><i style="height:55%"></i><i style="height:47%"></i>
+                <i style="height:70%"></i><i style="height:62%"></i><i style="height:84%"></i>
+                <i class="hi" style="height:96%"></i>
+              </div>
+              <div class="ui-rows">
+                <div class="ui-row"><span class="tag s1">Stage 1</span><i>Performing</i><b>$1.20M</b></div>
+                <div class="ui-row"><span class="tag s2">Stage 2</span><i>Under-performing</i><b>$1.85M</b></div>
+                <div class="ui-row"><span class="tag s3">Stage 3</span><i>Non-performing</i><b>$1.77M</b></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem / value -->
+  <section class="section">
+    <div class="container split">
+      <div class="reveal">
+        <span class="eyebrow">Why it matters</span>
+        <h2>Spreadsheets don't survive an audit. Governed models do.</h2>
+        <p class="lead">Expected credit loss is no longer a year-end calculation — it's a continuous, evidenced process.</p>
+        <p>Regulators and auditors expect defensible staging, documented assumptions, back-tested models and a clear trail from raw exposure to disclosure. Fragile, un-versioned spreadsheets can't deliver that. Digi8 replaces them with a governed engine and the model documentation to back it.</p>
+        <ul class="check-list">
+          <li>One governed source of truth for every ECL close</li>
+          <li>Versioned, repeatable and fully auditable by construction</li>
+          <li>Big-4-ready documentation and validation evidence</li>
+        </ul>
+      </div>
+      <div class="split__media reveal" aria-hidden="true">
+        <div class="metric-row"><span class="dot">PD</span><div><b>Probability of Default</b><small>Behavioural &amp; forward-looking term structures</small></div></div>
+        <div class="metric-row"><span class="dot">LGD</span><div><b>Loss Given Default</b><small>Collateral &amp; recovery aware</small></div></div>
+        <div class="metric-row"><span class="dot">EAD</span><div><b>Exposure at Default</b><small>Amortisation &amp; CCF modelling</small></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Capabilities -->
+  <section class="section section--soft" id="capabilities">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">The full ECL lifecycle</span>
+        <h2>Six capabilities, one governed platform</h2>
+        <p>Everything from first model build to ready-to-file disclosure — delivered and supported by Digi8.</p>
+      </div>
+
+      <div class="grid grid-3">
+        <article class="card cap-card reveal">
+          <span class="cap-num">01</span>
+          <span class="k">Model Development</span>
+          <h3>ECL Model Development</h3>
+          <p>PD, LGD &amp; EAD term-structures with 12-month and lifetime ECL engines, built to IFRS 9.</p>
+        </article>
+        <article class="card cap-card reveal">
+          <span class="cap-num">02</span>
+          <span class="k">Staging</span>
+          <h3>Staging &amp; SICR Framework</h3>
+          <p>Defensible Stage 1 / 2 / 3 classification with clear quantitative &amp; qualitative SICR triggers.</p>
+        </article>
+        <article class="card cap-card reveal">
+          <span class="cap-num">03</span>
+          <span class="k">Scenarios</span>
+          <h3>Macroeconomic Scenarios</h3>
+          <p>Forward-looking, probability-weighted scenarios linked to UAE &amp; global indicators.</p>
+        </article>
+        <article class="card cap-card reveal">
+          <span class="cap-num">04</span>
+          <span class="k">Assurance</span>
+          <h3>Validation &amp; Audit Support</h3>
+          <p>Independent validation, back-testing and Big-4-ready documentation.</p>
+        </article>
+        <article class="card cap-card reveal">
+          <span class="cap-num">05</span>
+          <span class="k">Automation</span>
+          <h3>ECL Automation Platform</h3>
+          <p>A governed, auditable engine that replaces fragile spreadsheets — versioned &amp; repeatable.</p>
+        </article>
+        <article class="card cap-card reveal">
+          <span class="cap-num">06</span>
+          <span class="k">Disclosure</span>
+          <h3>Regulatory &amp; Disclosure</h3>
+          <p>CBUAE-aligned reporting and ready-to-file IFRS 7 disclosure packs.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- How we engage -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">How we engage</span>
+        <h2>Five steps to a defensible close</h2>
+      </div>
+      <div class="grid grid-4 steps" style="grid-template-columns:repeat(5,1fr)">
+        <div class="step reveal"><h3>Diagnose</h3><p>Data &amp; model gaps</p></div>
+        <div class="step reveal"><h3>Model</h3><p>PD / LGD / EAD</p></div>
+        <div class="step reveal"><h3>Validate</h3><p>Test &amp; document</p></div>
+        <div class="step reveal"><h3>Automate</h3><p>Governed engine</p></div>
+        <div class="step reveal"><h3>Support</h3><p>Every close</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Outcomes -->
+  <section class="section section--soft">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Outcomes</span>
+        <h2>What you walk away with</h2>
+      </div>
+      <div class="grid grid-3">
+        <div class="card reveal">
+          <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></div>
+          <h3>Audit-ready by design</h3>
+          <p>Documentation, validation evidence and a complete trail your auditors can follow.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+          <h3>A faster, calmer close</h3>
+          <p>Automation that turns a multi-week scramble into a repeatable, governed process.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 3 5-6"/></svg></div>
+          <h3>Confidence with regulators</h3>
+          <p>CBUAE-aligned outputs and IFRS 7 disclosure packs, ready to file.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section section--tight">
+    <div class="container">
+      <div class="cta-band reveal">
+        <h2>Make your next ECL close defensible by design</h2>
+        <p>Talk to our team about end-to-end IFRS 9 modelling, validation and automation for your portfolio.</p>
+        <div class="btn-row">
+          <a class="btn btn-light" href="/contact/index.html">Get in Touch</a>
+          <a class="btn btn-outline-light" href="/products/index.html">Back to Products</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a class="brand" href="/index.html"><img class="brand__mark" src="/assets/img/digi8-binary.svg" alt="" width="66" height="40" /><span class="brand__name">digi8</span></a>
+          <p style="margin-top:16px">From concept to code — Transforming Business Through Technology</p>
+          <div class="footer-social">
+            <a href="https://www.facebook.com/p/Digi8-61577698963574/" target="_blank" rel="noopener" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 320 512" fill="currentColor"><path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"/></svg></a>
+            <a href="https://pk.linkedin.com/company/digi8-private-limited" target="_blank" rel="noopener" aria-label="LinkedIn"><svg width="18" height="18" viewBox="0 0 448 512" fill="currentColor"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg></a>
+            <a href="https://www.instagram.com/digi8.tech" target="_blank" rel="noopener" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 448 512" fill="currentColor"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="/index.html">Home</a></li>
+            <li><a href="/products/index.html">Products</a></li>
+            <li><a href="/about/index.html">About Us</a></li>
+            <li><a href="/clients/index.html">Our Clients</a></li>
+            <li><a href="/contact/index.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Products</h4>
+          <ul>
+            <li><a href="/products/ecl/index.html">ECL Engine</a></li>
+            <li><a href="/products/pf/index.html">Provident Fund</a></li>
+            <li><a href="https://www.regs.green" target="_blank" rel="noopener">Regs Green</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Get in touch</h4>
+          <ul>
+            <li><a href="mailto:connect@digi8.tech">connect@digi8.tech</a></li>
+            <li><a href="https://wa.me/923214639297" target="_blank" rel="noopener">+92 321 4639297</a></li>
+            <li>415, Block B Faisal Town,<br>Lahore, Pakistan</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Digi8 (Private) Limited. All rights reserved.</span>
+        <span>Technology | Agility | Intelligence</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/assets/js/main.js"></script>
+  <!-- WhatsApp floating button -->
+  <script>
+    (function () {
+      var h = document.querySelector(".site-header");
+      if (!h) return;
+      var toggle = function () { h.classList.toggle("is-scrolled", window.scrollY > 8); };
+      toggle();
+      window.addEventListener("scroll", toggle, { passive: true });
+    })();
+  </script>
+  <a class="wa-fab" href="https://wa.me/923214639297" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp" title="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.9c0 2.1.55 4.06 1.6 5.82L2 22l4.42-1.16a9.9 9.9 0 0 0 5.62 1.74h.01c5.46 0 9.9-4.45 9.9-9.9 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm5.8 14.06c-.25.7-1.44 1.33-2 1.42-.53.08-1.2.11-1.94-.12-.45-.14-1.02-.33-1.76-.65-3.1-1.34-5.12-4.46-5.28-4.67-.15-.2-1.26-1.67-1.26-3.19 0-1.52.8-2.27 1.08-2.58.28-.31.61-.39.82-.39.2 0 .41 0 .59.01.19.01.44-.07.69.53.25.6.86 2.1.94 2.25.08.15.13.33.03.53-.1.2-.15.33-.3.5-.15.18-.31.4-.45.53-.15.15-.3.31-.13.6.17.3.76 1.25 1.63 2.02 1.12 1 2.07 1.31 2.36 1.46.3.15.47.13.64-.08.17-.2.74-.86.94-1.16.2-.3.4-.25.67-.15.27.1 1.72.81 2.01.96.3.15.5.22.57.35.07.12.07.72-.18 1.42z"/></svg>
+  </a>
+</body>
+</html>
